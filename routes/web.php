@@ -7,12 +7,6 @@ Route::get('/', function () {
 })->name('home');
 
 
-
-Route::get('/objectif', function () {
-    return view('objectif');
-})->name('objectif');
-
-
 Route::view('/administrative-structure', 'administrative-structure')->name('administrative-structure');
 Route::view('/adminregulations', 'adminregulations')->name('adminregulations');
 Route::view('/annual-budget', 'annual-budget')->name('annual-budget');
@@ -32,7 +26,7 @@ Route::view('/measu-benefi', 'measu-benefi')->name('measu-benefi');
 Route::view('/meet', 'meet')->name('meet');
 Route::view('/member-general', 'member-general')->name('member-general');
 Route::view('/news', 'news')->name('news');
-// Route::view('/objectif', 'objectif')->name('objectif');
+Route::view('/objectif', 'objectif')->name('objectif');
 Route::view('/operational-plans', 'operational-plans')->name('operational-plans');
 Route::view('/policies', 'policies')->name('policies');
 Route::view('/recruitment', 'recruitment')->name('recruitment');

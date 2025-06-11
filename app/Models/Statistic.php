@@ -24,4 +24,15 @@ class Statistic extends Model implements HasMedia
             'updated_at' => 'datetime',
         ];
     }
+    /**
+     * Register the media collections for the model.
+     *
+     * @return void
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('statistics')
+            ->singleFile();
+
+    }
 }

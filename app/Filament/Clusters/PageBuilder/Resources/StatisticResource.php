@@ -32,6 +32,15 @@ class StatisticResource extends Resource
                 Forms\Components\TextInput::make('value')
                     ->required()
                     ->numeric(),
+
+                Forms\Components\SpatieMediaLibraryFileUpload::make('image')
+                    ->collection('statistics')
+                    ->label('Statistic Image')
+                    ->image()
+                    ->required()
+                    
+
+                    ->columnSpanFull(),
             ]);
     }
 

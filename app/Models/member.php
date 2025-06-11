@@ -12,7 +12,7 @@ class member extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\MemberFactory> */
     use HasFactory,
         InteractsWithMedia;
-    protected $fillable = ['name', 'position', 'description'];
+    protected $fillable = ['name', 'position', 'description', 'page_id', 'sort_order'];
     /**
      * The attributes that should be cast.
      *
@@ -32,5 +32,7 @@ class member extends Model implements HasMedia
     {
         $this->addMediaCollection('members')->singleFile();
     }
+    public function page() { return $this->HasOne(Page::class, 'id', 'page_id');  }
+
 
 }

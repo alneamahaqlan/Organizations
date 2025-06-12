@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('galleries', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->text('subtitle')->nullable();
-              $table->foreignId('page_id')->nullable()->constrained('pages');
-             $table->integer('sort_order')->default(0);
+        Schema::create('content_sections', function (Blueprint $table) {
+         $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+             $table->foreignId('page_id')->nullable()->constrained('pages');
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('content_sections');
     }
 };

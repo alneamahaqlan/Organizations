@@ -9,56 +9,90 @@ use Illuminate\Database\Seeder;
 
 class MenuSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $iconMap = [
-            'heroicon-o-home' => 'Home',
-            'heroicon-o-document' => 'Documents',
-            'heroicon-o-user' => 'Users',
-            'heroicon-o-menu' => 'Menus',
-            'heroicon-o-check-circle' => 'Approvals',
-            'heroicon-o-pencil' => 'Editor',
-            'heroicon-o-book-open' => 'Library',
+        $menus = [
+            [
+                'title' => 'نمو',
+                'icon' => 'fa-solid fa-eye',
+                'children' => [
+                    'أهداف الجمعية', 'النشأة والبداية', 'المؤسس', 'أعضاء مجلس الإدارة',
+                    'الهيكل الإداري', 'خطط الجمعية', 'قياس رضا المستفيدين', 'سياسة الجودة', 'الرؤية والرسالة'
+                ]
+            ],
+            [
+                'title' => 'الخدمات',
+                'icon' => 'fa-solid fa-gears',
+                'children' => [
+                    'نظام نمو', 'طلب إقامة برنامج', 'المبادرات', 'البريد الإلكتروني',
+                    'نظام إدارة التدريب', 'منصة نمو التعليمية', 'موقع القسم الرجالي', 'موقع القسم النسائي'
+                ]
+            ],
+            [
+                'title' => 'الحوكمة',
+                'icon' => 'fa-solid fa-briefcase',
+                'children' => [
+                    'سياسات الجمعية', 'لوائح الإدارة العامة', 'لوائح الميدان', 'القائمين على الجمعية',
+                    'الميزانية السنوية', 'اللجان الدائمة', 'مكاتب الجمعية', 'قرارات التملك',
+                    'التقارير السنوية', 'الإحصائيات'
+                ]
+            ],
+            [
+                'title' => 'الجمعية العمومية',
+                'icon' => 'fa-solid fa-users',
+                'children' => [
+                    'الترشح', 'محاضر الاجتماعات', 'الأعضاء'
+                ]
+            ],
+            [
+                'title' => 'التبرعات',
+                'icon' => 'fa-solid fa-hand-holding-heart',
+                'children' => [
+                    'المتجر الإلكتروني', 'الاستقطاع الشهري', 'الحسابات البنكية'
+                ]
+            ],
+            [
+                'title' => 'المناقصات',
+                'icon' => 'fa-solid fa-file-invoice',
+                'children' => []
+            ],
+            [
+                'title' => 'المركز الإعلامي',
+                'icon' => 'fa-solid fa-video',
+                'children' => [
+                    'أخبار الجمعية', 'القناة المرئية', 'القناة الصوتية', 'نماذج من الطلاب'
+                ]
+            ],
+            [
+                'title' => 'التوظيف والتطوع',
+                'icon' => 'fa-solid fa-briefcase',
+                'children' => [
+                    'بوابة التوظيف', 'استمارة التطوع'
+                ]
+            ],
         ];
 
-        $icons = array_keys($iconMap);
-
-        $pages = Page::inRandomOrder()->get();
-        $pageIndex = 0;
-
-        // Create parent menu items
-        foreach (array_values($iconMap) as $index => $label) {
-            $icon = $icons[$index % count($icons)];
-            $page = $pages[$pageIndex % $pages->count()];
-
+        foreach ($menus as $index => $menuData) {
+            $page = Page::where('title', $menuData['title'])->first();
             $menu = Menu::create([
-                'title' => $label,
-             
-                'page_id' => $page->id,
+                'title' => $menuData['title'],
+                'page_id' => $page?->id,
                 'parent_id' => null,
                 'sort_order' => $index + 1,
                 'status' => PageStatus::Published,
-                'icon' => $icon,
+                'icon' => $menuData['icon'],
             ]);
 
-            $pageIndex++;
-
-            // Create child menu items for each parent
-            for ($i = 1; $i <= 3; $i++) {
-                $childPage = $pages[$pageIndex % $pages->count()];
+            foreach ($menuData['children'] as $i => $childTitle) {
+                $childPage = Page::where('title', $childTitle)->first();
                 Menu::create([
-                    'title' => $label . ' Option ' . $i,
-
-                    'page_id' => $childPage->id,
+                    'title' => $childTitle,
+                    'page_id' => $childPage?->id,
                     'parent_id' => $menu->id,
-                    'sort_order' => $i,
+                    'sort_order' => $i + 1,
                     'status' => PageStatus::Published,
-                    'icon' => $icons[array_rand($icons)],
+                    'icon' => $menuData['icon'],
                 ]);
-                $pageIndex++;
             }
         }
     }

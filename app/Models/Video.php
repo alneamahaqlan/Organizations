@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Partner extends Model implements HasMedia
+class Video extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\PartnerFactory> */
+    /** @use HasFactory<\Database\Factories\VideoFactory> */
     use HasFactory,
         InteractsWithMedia;
-    protected $fillable = ['page_id', 'sort_order'];
+    protected $fillable = [ 'title', 'page_id'];
     /**
      * The attributes that should be cast.
      *
@@ -21,7 +21,6 @@ class Partner extends Model implements HasMedia
     protected function casts(): array
     {
         return [
-
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
@@ -31,9 +30,13 @@ class Partner extends Model implements HasMedia
      */
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('partners')->singleFile();
+        $this->addMediaCollection('videos')->singleFile();
     }
-
-        public function page() { return $this->HasOne(Page::class, 'id', 'page_id');  }
-
+    /**
+     * Get the page associated with the video.
+     */
+    public function page()
+    {
+        return $this->belongsTo(Page::class);
+    }
 }

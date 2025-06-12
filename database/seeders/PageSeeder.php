@@ -12,45 +12,22 @@ class PageSeeder extends Seeder
     public function run(): void
     {
         $titles = [
-            'Home',
-            'Documents',
-            'Users',
-            'Menus',
-            'Approvals',
-            'Editor',
-            'Library',
+            'الرئيسية', 'أهداف الجمعية', 'النشأة والبداية', 'المؤسس', 'أعضاء مجلس الإدارة',
+            'الهيكل الإداري', 'خطط الجمعية', 'قياس رضا المستفيدين', 'سياسة الجودة', 'الرؤية والرسالة',
+            'نظام نمو', 'طلب إقامة برنامج', 'المبادرات', 'البريد الإلكتروني', 'نظام إدارة التدريب',
+            'منصة نمو التعليمية', 'موقع القسم الرجالي', 'موقع القسم النسائي', 'سياسات الجمعية',
+            'لوائح الإدارة العامة', 'لوائح الميدان', 'القائمين على الجمعية', 'الميزانية السنوية',
+            'اللجان الدائمة', 'مكاتب الجمعية', 'قرارات التملك', 'التقارير السنوية', 'الإحصائيات',
+            'الترشح', 'محاضر الاجتماعات', 'الأعضاء', 'المتجر الإلكتروني', 'الاستقطاع الشهري',
+            'الحسابات البنكية', 'المناقصات', 'أخبار الجمعية', 'القناة المرئية', 'القناة الصوتية',
+            'نماذج من الطلاب', 'بوابة التوظيف', 'استمارة التطوع'
         ];
 
-        $extraPages = [
-            'Team',
-            'Company History',
-            'Mission & Vision',
-            'Blog',
-            'News',
-            'Careers',
-            'Contact',
-            'Support',
-            'Pricing',
-            'Terms of Service',
-            'Privacy Policy',
-            'FAQ',
-            'Tutorials',
-            'Guides',
-            'API Docs',
-            'Events',
-            'Partnerships',
-            'Press',
-            'Downloads',
-            'Changelog'
-        ];
-
-        $allTitles = [...$titles, ...$extraPages];
-
-        foreach ($allTitles as $title) {
+        foreach ($titles as $title) {
             Page::create([
                 'title' => $title,
                 'slug' => Str::slug($title),
-                'content' => "<p>This is the content for the {$title} page.</p>",
+                'content' => "<p>صفحة {$title}</p>",
                 'status' => PageStatus::Published,
             ]);
         }

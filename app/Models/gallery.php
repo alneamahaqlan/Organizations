@@ -12,10 +12,18 @@ class gallery extends Model implements HasMedia
     /** @use HasFactory<\Database\Factories\GalleryFactory> */
     use HasFactory,
         InteractsWithMedia;
+    protected $fillable = ['title', 'subtitle', 'page_id', 'sort_order'];
+    /**
+     * The relationship with the Page model.
+     */
+    public function page()
+    {
+        return $this->hasOne(Page::class, 'id', 'page_id');
+    }
 
 
 
-   
+
     /**
      * The attributes that should be cast.
      *

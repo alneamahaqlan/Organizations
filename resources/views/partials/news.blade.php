@@ -1,4 +1,4 @@
- <section id="news ">
+ <section id="news">
      <div class="container ">
          <div class="row news-block">
              <div class="col-lg-2  new-news-title">

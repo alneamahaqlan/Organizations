@@ -31,18 +31,19 @@ protected static ?string $cluster = PageBuilder::class;
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('content')
+
+                Forms\Components\Textarea::make('short_description')
                     ->columnSpanFull(),
-                Forms\Components\FileUpload::make('image')
-                    ->image(),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-                Forms\Components\TextInput::make('page_id')
-                    ->numeric()
-                    ->default(null),
+
+
+                Forms\Components\Select::make('page_id')
+                ->relationship('page', 'title')
+                 ->searchable()
+                ->label('page')
+                ->preload()
+                ->nullable(),
+
+               
             ]);
     }
 

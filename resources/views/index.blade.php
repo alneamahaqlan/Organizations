@@ -5,10 +5,11 @@
 @section('content')
 
 @include('partials.carousel')
+@include('partials.organization-news')
 @include('partials.news-ticker')
 @include('partials.about-section')
 @include('partials.examples-section')
-@include('partials.news-section')
+@include('partials.news')
 @include('partials.about-association')
 @include('partials.statistics-section')
 @include('partials.images-section')

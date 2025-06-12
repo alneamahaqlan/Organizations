@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class YouTube extends Model
 {
-    /** @use HasFactory<\Database\Factories\NewsFactory> */
+    /** @use HasFactory<\Database\Factories\YouTubeFactory> */
     use HasFactory;
-    protected $fillable = ['title','page_id', 'short_description'];
+    protected $fillable = [ 'title', 'url', 'page_id'];
     /**
      * The attributes that should be cast.
      *
@@ -22,12 +22,11 @@ class News extends Model
             'updated_at' => 'datetime',
         ];
     }
-
     /**
-     * Get the page associated with the news.
+     * Get the page associated with the YouTube video.
      */
     public function page()
     {
-        return $this->hasOne(Page::class, 'id', 'page_id');
+        return $this->belongsTo(Page::class);
     }
 }
